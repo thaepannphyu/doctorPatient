@@ -74,12 +74,6 @@ class User extends Authenticatable
         ->withTimestamps();
     }
 
-    public function doctor()
-    {
-        return $this->belongsToMany(DoctorProfile::class, 'appointments', 'patient_id', 'doctor_id')
-        ->withPivot('symptoms', 'date')
-        ->withTimestamps();
-    }
     
-
+    
 }
