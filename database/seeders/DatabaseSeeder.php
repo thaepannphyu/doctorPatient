@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $userRole = Role::create(['name' => 'user']);
 
 
-        $admin = User::factory()->create(['password'=>"12345678"]);
+        $admin = User::factory()->create(["email"=>"phyu24655@gmail.com",'password'=>"12345678"]);
         $user = User::factory()->create(['password'=>"12345678"]);
 
       User::factory(5)->create(['password'=>"12345678"])->each(function ($user) use ($doctorRole) {

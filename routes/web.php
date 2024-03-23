@@ -25,8 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/doctors/appointment', [DoctorProfileController::class, 'store']);
 
+Route::post('/doctors/appointment', [DoctorProfileController::class, 'store']);
 Route::get('/doctors', [DoctorProfileController::class, 'index']);
 Route::get('/doctors/{id}', [DoctorProfileController::class, 'show']);
 

@@ -15,10 +15,11 @@ class DoctorProfileController extends Controller
             "data" => DoctorProfile::latest()->paginate()
         ]);
     }
+
     public function show($id) {
        
         return view("components.profile", [
-            "data" =>DoctorProfile::find($id)
+            "data" =>DoctorProfile::findorFail($id)
         ]);
     }
     public function create($id) {
