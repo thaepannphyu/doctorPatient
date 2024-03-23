@@ -67,13 +67,19 @@ class User extends Authenticatable
         return $this->hasOne(DoctorProfile::class);
     }
 
+    public function patients()
+    {
+        return $this->belongsToMany(User::class, 'appointments',  'patient_id','doctor_id')
+        ->withPivot('symptoms', 'date')
+        ->withTimestamps();
+    }
+
     public function doctor()
     {
         return $this->belongsToMany(DoctorProfile::class, 'appointments', 'patient_id', 'doctor_id')
         ->withPivot('symptoms', 'date')
         ->withTimestamps();
     }
-
-
     
+
 }

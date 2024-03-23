@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $doctorRole= Role::create(['name' => 'doctor']);
         $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+       
 
 
         $admin = User::factory()->create(["email"=>"phyu24655@gmail.com",'password'=>"12345678"]);
@@ -33,10 +33,8 @@ class DatabaseSeeder extends Seeder
             $user->assignRole($doctorRole);
         });
 
-       
-
 
         $admin->assignRole($adminRole);
-        $user->assignRole($userRole);
+     
     }
 }

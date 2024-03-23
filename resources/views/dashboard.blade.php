@@ -8,18 +8,18 @@
     <x-sideBarToggle/>
     <x-table :data="$data"/>
 </x-dashboard>
-@endif
-
-
-@if (Auth::user()->hasRole("doctor"))
+@elseif (Auth::user()->hasRole("doctor"))
 <x-dashboard>
   <x-doctor-sidebar/>
   <x-sideBarToggle/>
   <x-table :data="$data"/>
 
 </x-dashboard>
-@endif
+
+@else
 
 <x-dashboard>
  <x-card-loop :data="$data"/>
 </x-dashboard>
+
+@endif

@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointments;
 use App\Models\DoctorProfile;
+use App\Models\User;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class DoctorProfileController extends Controller
 {
     public function index() {
+       
+        // User::latest()->role("patient")->whereHas("patients",function($query){
+        //     $query->where("doctor_id",Auth::user()->id);
+        // })->paginate()
         return view("dashboard", [
-            "data" => DoctorProfile::latest()->paginate()
+            "data" => User::latest()->role("patient")->whereHas("patients",function($query){
+                    $query->where("doctor_id",Auth::user()->id);
+                })->paginate()
         ]);
     }
 
@@ -44,6 +52,10 @@ class DoctorProfileController extends Controller
 
        // Attach the patient to the doctor
        $doctor->patients()->attach($request->patient_id, ['date' => $request->date]);
+
+       $user= User::findOrFail($request->patient_id);
+       Role::create(['name' => 'patient']);
+       $user->assignRole('patient');
 
        return redirect("/doctors");
     }

@@ -10,7 +10,7 @@ class DoctorDashBoardController extends Controller
     public function index() {
 
         return view("dashboard",[
-            "data"=>User::latest()->role("user")->paginate()
+            "data"=>User::latest()->role("patient")->paginate()
         ]);
         
     }
